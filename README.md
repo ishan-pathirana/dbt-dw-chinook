@@ -9,6 +9,8 @@ This repository showcases a complete analytics-ready data warehouse build using 
 
 ## Architecture
 
+![Architecture overview diagram](assets/project_overview.png)
+
 This project follows a Kimball-style dimensional modeling approach, producing conformed dimensions and fact tables based on the Chinook transactional dataset. The overall design is supported by the conceptual and logical diagrams in the `assets/` folder, along with the bus matrix and model definitions.
 
 The warehouse follows a Medallion-inspired layered structure:
