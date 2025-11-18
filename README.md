@@ -7,6 +7,26 @@ This repository showcases a complete analytics-ready data warehouse build using 
 - Dimensional modelling artefacts: bus matrix + models spreadsheet (`Chinook Data Warehouse - Bus Matrix & Models.xlsx`)  
 - Implementation: `dbt Core` project built for `Snowflake`, including staging, core dimensioanl model and marts
 
+## Architecture
+
+This project follows a Kimball-style dimensional modeling approach, producing conformed dimensions and fact tables based on the Chinook transactional dataset. The overall design is supported by the conceptual and logical diagrams in the `assets/` folder, along with the bus matrix and model definitions.
+
+The warehouse follows a Medallion-inspired layered structure:
+
+- **Raw Layer (Outside dbt)**  
+  A direct 1:1 copy of the OLTP Chinook source tables stored in `CHINOOK.RAW`. No transformations are applied at this stage.
+
+- **Staging Layer (dbt)**  
+  Performs initial standardization, renaming, typing, and light cleansing of Raw tables to prepare them for modeling.
+
+- **Core Layer (dbt)**  
+  Implements the Kimball dimensional model, including conformed dimension tables and fact tables.
+
+- **Marts Layer (dbt)**  
+  Business-facing models optimized for reporting, analytics, and downstream consumption.
+
+This layered architecture keeps responsibilities cleanly separated, supports auditability, and enables scalable transformation workflows.
+
 ## Source ER Diagram
 ![Source ER Diagram](assets/source_er_ansi_sql.png)
 
